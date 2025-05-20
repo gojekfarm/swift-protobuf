@@ -45,7 +45,7 @@ let package = Package(
   products: [...],
   dependencies: [
     ...
-    .package(url: "https://github.com/apple/swift-protobuf", from: "1.21.0.1"),
+    .package(url: "https://github.com/apple/swift-protobuf", from: "1.29.0.1"),
     ...
   ],
   targets: [
