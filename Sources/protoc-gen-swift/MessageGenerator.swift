@@ -1,4 +1,3 @@
-
 // Sources/protoc-gen-swift/MessageGenerator.swift - Per-message logic
 //
 // Copyright (c) 2014 - 2016 Apple Inc. and the project authors
