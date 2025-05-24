@@ -10192,11 +10192,15 @@ extension EditionUnittest_TestAllTypes: SwiftProtobuf.Message, SwiftProtobuf._Me
     var _defaultCord: String? = nil
     var _oneofField: EditionUnittest_TestAllTypes.OneOf_OneofField?
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -10920,11 +10924,15 @@ extension EditionUnittest_NestedTestAllTypes: SwiftProtobuf.Message, SwiftProtob
     var _lazyChild: EditionUnittest_NestedTestAllTypes? = nil
     var _eagerChild: EditionUnittest_TestAllTypes? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -11024,11 +11032,15 @@ extension EditionUnittest_TestDeprecatedFields: SwiftProtobuf.Message, SwiftProt
     var _oneofFields: EditionUnittest_TestDeprecatedFields.OneOf_OneofFields?
     var _nested: EditionUnittest_TestDeprecatedFields? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -11181,10 +11193,7 @@ extension EditionUnittest_ForeignMessage: SwiftProtobuf.Message, SwiftProtobuf._
 
 extension EditionUnittest_TestReservedFields: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".TestReservedFields"
-  static let _protobuf_nameMap = SwiftProtobuf._NameMap(
-      reservedNames: ["bar", "baz"],
-      reservedRanges: [2..<3, 9..<12, 15..<16],
-      numberNameMappings: [:])
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     // Load everything into unknown fields
@@ -12130,11 +12139,15 @@ extension EditionUnittest_TestRequired: SwiftProtobuf.Message, SwiftProtobuf._Me
     var _c: Int32? = nil
     var _optionalForeign: EditionUnittest_ForeignMessage? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -12537,11 +12550,15 @@ extension EditionUnittest_TestNestedRequiredForeign: SwiftProtobuf.Message, Swif
     var _requiredEnumMulti: EditionUnittest_TestRequiredEnumMulti? = nil
     var _requiredNoMask: EditionUnittest_TestRequiredNoMaskMulti? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -12905,11 +12922,15 @@ extension EditionUnittest_TestRecursiveMessage: SwiftProtobuf.Message, SwiftProt
     var _a: EditionUnittest_TestRecursiveMessage? = nil
     var _i: Int32? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -12989,11 +13010,15 @@ extension EditionUnittest_TestMutualRecursionA: SwiftProtobuf.Message, SwiftProt
     var _subGroup: EditionUnittest_TestMutualRecursionA.SubGroup? = nil
     var _subGroupR: [EditionUnittest_TestMutualRecursionA.SubGroupR] = []
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -13073,11 +13098,15 @@ extension EditionUnittest_TestMutualRecursionA.SubMessage: SwiftProtobuf.Message
   fileprivate class _StorageClass {
     var _b: EditionUnittest_TestMutualRecursionB? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -13147,11 +13176,15 @@ extension EditionUnittest_TestMutualRecursionA.SubGroup: SwiftProtobuf.Message, 
     var _subMessage: EditionUnittest_TestMutualRecursionA.SubMessage? = nil
     var _notInThisScc: EditionUnittest_TestAllTypes? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -13263,11 +13296,15 @@ extension EditionUnittest_TestMutualRecursionB: SwiftProtobuf.Message, SwiftProt
     var _a: EditionUnittest_TestMutualRecursionA? = nil
     var _optionalInt32: Int32? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -14217,11 +14254,15 @@ extension EditionUnittest_TestExtremeDefaultValues: SwiftProtobuf.Message, Swift
     var _cordWithZero: String? = nil
     var _replacementString: String? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -14679,11 +14720,15 @@ extension EditionUnittest_ManyOptionalString: SwiftProtobuf.Message, SwiftProtob
     var _str31: String? = nil
     var _str32: String? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -18430,11 +18475,15 @@ extension EditionUnittest_TestVerifyBigFieldNumberUint32.Nested: SwiftProtobuf.M
     var _optionalNested: EditionUnittest_TestVerifyBigFieldNumberUint32.Nested? = nil
     var _repeatedNested: [EditionUnittest_TestVerifyBigFieldNumberUint32.Nested] = []
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -18628,11 +18677,15 @@ extension EditionUnittest_EnumParseTester: SwiftProtobuf.Message, SwiftProtobuf.
     var _packedArbitraryHifield: [EditionUnittest_EnumParseTester.Arbitrary] = []
     var _otherField: Int32? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -19296,11 +19349,15 @@ extension EditionUnittest_InlinedStringIdxRegressionProto: SwiftProtobuf.Message
     var _str2: String? = nil
     var _str3: Data? = nil
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 
@@ -19863,11 +19920,15 @@ extension EditionUnittest_TestMessageWithManyRepeatedPtrFields: SwiftProtobuf.Me
     var _repeatedString31: [String] = []
     var _repeatedString32: [String] = []
 
+    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
 
     private init() {}
 

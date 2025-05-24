@@ -1,4 +1,3 @@
-
 // Sources/protoc-gen-swift/MessageFieldGenerator.swift - Facts about a single message field
 //
 // Copyright (c) 2014 - 2016 Apple Inc. and the project authors

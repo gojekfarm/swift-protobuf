@@ -1089,39 +1089,25 @@ public final class FieldDescriptor {
     /// Declared type of this field.
     public private(set) var type: Google_Protobuf_FieldDescriptorProto.TypeEnum
 
-    /// This should never be called directly. Use isRequired and isRepeated
-    /// helper methods instead.
-    @available(*, deprecated, message: "Use isRequired or isRepeated instead.")
-    public var label: Google_Protobuf_FieldDescriptorProto.Label {
-        if isRepeated {
-            return .repeated
-        } else if isRequired {
-            return .required
-        } else {
-            return .optional
-        }
-    }
+    /// optional/required/repeated
+    public let label: Google_Protobuf_FieldDescriptorProto.Label
 
-    // Storage for `label`, used by other apis.
-    private var _label: Google_Protobuf_FieldDescriptorProto.Label
-
-    /// Whether or not the field is required. For proto2 required fields and
-    /// Editions `LEGACY_REQUIRED` fields.
+    /// Shorthand for `label` == `.required`.
+    ///
+    /// NOTE: This could also be a map as the are also repeated fields.
     public var isRequired: Bool {
         // Implementation comes from FieldDescriptor::is_required()
         features.fieldPresence == .legacyRequired
     }
-    /// Whether or not the field is repeated/map field.
-    public var isRepeated: Bool { _label == .repeated }
-
-    /// Use !isRequired() && !isRepeated() instead.
-    @available(*, deprecated, message: "Use !isRequired && !isRepeated instead.")
+    /// Shorthand for `label` == `.optional`
     public var isOptional: Bool { label == .optional }
+    /// Shorthand for `label` == `.repeated`
+    public var isRepeated: Bool { label == .repeated }
 
     /// Is this field packable.
     public var isPackable: Bool {
         // This logic comes from the C++ FieldDescriptor::is_packable() impl.
-        isRepeated && FieldDescriptor.isPackable(type: type)
+        label == .repeated && FieldDescriptor.isPackable(type: type)
     }
     /// If this field is packable and packed.
     public var isPacked: Bool {
@@ -1140,7 +1126,7 @@ public final class FieldDescriptor {
     var _hasOptionalKeyword: Bool {
         // This logic comes from the C++ FieldDescriptor::has_optional_keyword()
         // impl.
-        proto3Optional || (file.edition == .proto2 && !isRequired && !isRepeated && oneofIndex == nil)
+        proto3Optional || (file.edition == .proto2 && label == .optional && oneofIndex == nil)
     }
     @available(*, deprecated, message: "Please open a GitHub issue if you think functionality is missing.")
     public var hasOptionalKeyword: Bool {
@@ -1153,7 +1139,7 @@ public final class FieldDescriptor {
     /// repeated fields, and singular proto3 fields without "optional".
     public var hasPresence: Bool {
         // This logic comes from the C++ FieldDescriptor::has_presence() impl.
-        guard !isRepeated else { return false }
+        guard label != .repeated else { return false }
         switch type {
         case .group, .message:
             // Groups/messages always get field presence.
@@ -1357,9 +1343,9 @@ public final class FieldDescriptor {
         // helper instead of access `label` directly, they won't need this, but for
         // consistency, remap `label` to expose the pre Editions/Features value.
         if self.features.fieldPresence == .legacyRequired && proto.label == .optional {
-            self._label = .required
+            self.label = .required
         } else {
-            self._label = proto.label
+            self.label = proto.label
         }
         self.options = proto.options
         self.oneofIndex = proto.hasOneofIndex ? proto.oneofIndex : nil

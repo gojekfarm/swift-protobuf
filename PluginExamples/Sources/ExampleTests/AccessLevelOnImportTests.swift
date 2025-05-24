@@ -1,3 +1,5 @@
+#if compiler(>=5.9)
+
 import AccessLevelOnImport
 import XCTest
 
@@ -7,3 +9,5 @@ final class AccessLevelOnImportTests: XCTestCase {
         XCTAssertEqual(access.dependency.name, "Dependency")
     }
 }
+
+#endif

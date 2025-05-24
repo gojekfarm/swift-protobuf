@@ -23,15 +23,19 @@ import Foundation
 internal struct TextFormatDecoder: Decoder {
     internal var scanner: TextFormatScanner
     private var fieldCount = 0
-    private let terminator: UInt8?
-    private let fieldNameMap: _NameMap
-    private let messageType: any Message.Type
+    private var terminator: UInt8?
+    private var fieldNameMap: _NameMap?
+    private var messageType: any Message.Type
 
     internal var options: TextFormatDecodingOptions {
         scanner.options
     }
 
-    internal var complete: Bool { scanner.complete }
+    internal var complete: Bool {
+        mutating get {
+            scanner.complete
+        }
+    }
 
     internal init(
         messageType: any Message.Type,
@@ -46,7 +50,6 @@ internal struct TextFormatDecoder: Decoder {
         }
         fieldNameMap = nameProviding._protobuf_nameMap
         self.messageType = messageType
-        self.terminator = nil
     }
 
     internal init(messageType: any Message.Type, scanner: TextFormatScanner, terminator: UInt8?) throws {
@@ -68,7 +71,7 @@ internal struct TextFormatDecoder: Decoder {
             scanner.skipOptionalSeparator()
         }
         if let fieldNumber = try scanner.nextFieldNumber(
-            names: fieldNameMap,
+            names: fieldNameMap!,
             messageType: messageType,
             terminator: terminator
         ) {

@@ -251,7 +251,20 @@ extension Descriptor {
     /// This also uses Range<> since the options that could be on
     /// `extensionRanges` no longer can apply as the things have been merged.
     var _normalizedExtensionRanges: [Range<Int32>] {
-        self.messageExtensionRanges.map({ $0.start..<$0.end }).sortAndMergeContinuous()
+        var ordered: [Range<Int32>] = self.messageExtensionRanges.sorted(by: {
+            $0.start < $1.start
+        }).map {
+            $0.start..<$0.end
+        }
+        if ordered.count > 1 {
+            for i in (0..<(ordered.count - 1)).reversed() {
+                if ordered[i].upperBound == ordered[i + 1].lowerBound {
+                    ordered[i] = ordered[i].lowerBound..<ordered[i + 1].upperBound
+                    ordered.remove(at: i + 1)
+                }
+            }
+        }
+        return ordered
     }
 
     /// The `extensionRanges` from `normalizedExtensionRanges`, but takes a step
@@ -319,7 +332,7 @@ extension FieldDescriptor {
         case .sint64: result = "Int64"
         }
 
-        if isRepeated {
+        if label == .repeated {
             return "[\(result)]"
         }
         return result
@@ -327,16 +340,18 @@ extension FieldDescriptor {
 
     func swiftStorageType(namer: SwiftProtobufNamer) -> String {
         let swiftType = self.swiftType(namer: namer)
-        if isRepeated {
+        switch label {
+        case .repeated:
             return swiftType
-        }
-        guard realContainingOneof == nil else {
-            return swiftType
-        }
-        if hasPresence {
-            return "\(swiftType)?"
-        } else {
-            return swiftType
+        case .optional, .required:
+            guard realContainingOneof == nil else {
+                return swiftType
+            }
+            if hasPresence {
+                return "\(swiftType)?"
+            } else {
+                return swiftType
+            }
         }
     }
 
@@ -369,7 +384,7 @@ extension FieldDescriptor {
         if isMap {
             return "[:]"
         }
-        if isRepeated {
+        if label == .repeated {
             return "[]"
         }
 

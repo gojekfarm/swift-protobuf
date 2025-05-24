@@ -8,6 +8,7 @@
 
 // This test only makes sense for Swift 5.9+ because 5.8 doesn't support access
 // level on imports.
+#if compiler(>=5.9)
 private import Foundation
 
 struct InternalImportsByDefault {
@@ -22,3 +23,4 @@ struct InternalImportsByDefault {
 
 @inline(never)
 func blackhole<T>(_: T) {}
+#endif
